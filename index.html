@@ -25,7 +25,6 @@
       height: 40px;
       background-color: white;
     }
-    
   </style>
   <body>
     <div class="layer">
@@ -39,30 +38,87 @@
         href="https://developer.mozilla.org/ko/docs/Games/Tutorials/%EC%88%9C%EC%88%98%ED%95%9C_%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8%EB%A5%BC_%EC%9D%B4%EC%9A%A9%ED%95%9C_2D_%EB%B2%BD%EB%8F%8C%EA%B9%A8%EA%B8%B0_%EA%B2%8C%EC%9E%84/%EA%B3%B5_%EC%9B%80%EC%A7%81%EC%9D%B4%EA%B8%B0"
         >움직이기</a
       >
-      <input id="time"/>
+      <input id="time" />
 
       <button id="start">시작</button>
-      
 
-      <input type="text" id="input1"/>
+      <input type="text" id="input1" />
+      <button id="startEnglish">start</button>
+      <input
+        id="word"
+        autocapitalize="none"
+        autocomplete="off"
+        autocorrect="off"
+        name="search_query"
+        tabindex="0"
+        type="text"
+        spellcheck="false"
+        placeholder="단어"
+        aria-label="단어"
+      />
 
-      <div></div>
+      <input
+        id="meaning"
+        autocapitalize="none"
+        autocomplete="off"
+        autocorrect="off"
+        name="search_query"
+        tabindex="0"
+        type="text"
+        spellcheck="false"
+        placeholder="뜻"
+        aria-label="뜻"
+      />
+      <div id="worddiv"></div>
+      <div id="meaningdiv"></div>
     </div>
 
     <script>
-      const start = document.getElementById("start"); 
+      const start = document.getElementById("start");
       const time = document.getElementById("time");
+      const word = document.getElementById("word");
+      const meaning = document.getElementById("meaning");
+      const meaningdiv = document.getElementById("meaningdiv");
+      const worddiv = document.getElementById("worddiv");
+      const startEnglish = document.getElementById("startEnglish");
+
+      let study = "nostudy";
+      let wordvalue;
+      let meaningvalue;
+      const English = () => {
+        if (study === "nostudy") {
+          study = "study";
+          wordvalue = word.value;
+          meaningvalue = meaning.value;
+          word.value = "";
+          meaning.value = "";
+          console.log("if1");
+          return
+        }
+        if (study === "study") {
+          if (wordvalue === word.value || meaningvalue === word.value) {
+            worddiv.innerHTML = wordvalue;
+            meaningdiv.innerHTML = meaningvalue;
+            meaningdiv.innerHTML = "";
+            worddiv.innerHTML = "";
+            /*setTimeout(() =>  , 1000);*/
+
+          }
+          console.log("if2");
+        }
+      };
+
       let timeset;
-  
+
       const gauge = () => {
         for (i = 0; i < 3; i++) {
           timeset = time.value;
           console.log(timeset);
-            
-          document.getElementById('test2' ).style.width = width;
 
-          width = document.getElementById('test').offsetWidth;
-            //document.getElementById("test").style.width = "300px";
+          document.getElementById("test2").style.width = width;
+
+          width = document.getElementById("test").offsetWidth;
+          //document.getElementById("test").style.width = "300px";
         }
       };
 
@@ -70,7 +126,8 @@
       input1.onkeydown = function (event) {
         alert("키코드: " + event.keyCode);
       };
-     start.addEventListener("click", gauge)
+      startEnglish.addEventListener("click", English);
+      start.addEventListener("click", gauge);
     </script>
   </body>
 </html>
