@@ -93,18 +93,30 @@
           word.value = "";
           meaning.value = "";
           console.log("if1");
-          return
+          return;
         }
         if (study === "study") {
-          if (wordvalue === word.value || meaningvalue === word.value) {
+          if (wordvalue !== word.value || meaningvalue !== meaning.value) {
             worddiv.innerHTML = wordvalue;
             meaningdiv.innerHTML = meaningvalue;
-            meaningdiv.innerHTML = "";
-            worddiv.innerHTML = "";
-            /*setTimeout(() =>  , 1000);*/
-
+            word.value = "";
+            meaning.value = "";
+            setTimeout(() => {
+              meaningdiv.innerHTML = "";
+              worddiv.innerHTML = "";
+            }, 1000);
+            console.log("if3");
+            console.log(meaningvalue);
           }
           console.log("if2");
+          if (wordvalue == word.value && meaningvalue == meaning.value) {
+            meaning.value = "";
+            word.value = "";
+            worddiv.innerHTML = "right";
+            setTimeout(() => {
+              worddiv.innerHTML = "";
+            }, 1000);
+          }
         }
       };
 
