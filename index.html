@@ -53,8 +53,8 @@
         tabindex="0"
         type="text"
         spellcheck="false"
-        placeholder="단어"
-        aria-label="단어"
+        placeholder="암호"
+        aria-label="암호"
       />
 
       <input
@@ -69,7 +69,20 @@
         placeholder="뜻"
         aria-label="뜻"
       />
-      <div id="worddiv"></div>
+      <button id="pibutton">파이</button>
+      <input
+        id="pivalue"
+        autocapitalize="none"
+        autocomplete="off"
+        autocorrect="off"
+        name="search_query"
+        tabindex="0"
+        type="text"
+        spellcheck="false"
+        placeholder="자릿수"
+        aria-label="자릿수"
+      />
+      <div id="pi"></div>
       <div id="meaningdiv"></div>
     </div>
 
@@ -81,6 +94,18 @@
       const meaningdiv = document.getElementById("meaningdiv");
       const worddiv = document.getElementById("worddiv");
       const startEnglish = document.getElementById("startEnglish");
+      const pibutton = document.getElementById("pibutton");
+      const pivalue = document.getElementById("pivalue");
+
+      const n = pivalue.value;
+      let value;
+      const math = () => {
+       pi.innerHTML = value;
+       value = 1 - 1/3 + 1/5 - 1/7 + 1/9 - 1/11 + 1/13 - 1/15
+        // for (i = 0; i < 1; i++) {
+          
+        // }
+      };
 
       let study = "nostudy";
       let wordvalue;
@@ -140,6 +165,7 @@
       };
       startEnglish.addEventListener("click", English);
       start.addEventListener("click", gauge);
+      pibutton.addEventListener("click", math);
     </script>
   </body>
 </html>
