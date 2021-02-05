@@ -42,8 +42,23 @@
 
       <button id="start">시작</button>
 
-      <input type="text" id="input1" />
+      <input
+        type="text"
+        id="input1"
+        autocapitalize="none"
+        autocomplete="off"
+        autocorrect="off"
+        name="search_query"
+        tabindex="0"
+        type="text"
+        spellcheck="false"
+        placeholder="키코드"
+        aria-label="키코드"
+      />
       <button id="startEnglish">start</button>
+      <button id="nextEnglish">next</button>
+      <button id="eraseEnglish">erase</button>
+
       <input
         id="word"
         autocapitalize="none"
@@ -53,8 +68,8 @@
         tabindex="0"
         type="text"
         spellcheck="false"
-        placeholder="암호"
-        aria-label="암호"
+        placeholder="철자"
+        aria-label="철자"
       />
 
       <input
@@ -69,6 +84,7 @@
         placeholder="뜻"
         aria-label="뜻"
       />
+
       <button id="pibutton">파이</button>
       <input
         id="pivalue"
@@ -82,7 +98,7 @@
         placeholder="자릿수"
         aria-label="자릿수"
       />
-      <div id="pi"></div>
+      <div id="worddiv"></div>
       <div id="meaningdiv"></div>
     </div>
 
@@ -96,14 +112,15 @@
       const startEnglish = document.getElementById("startEnglish");
       const pibutton = document.getElementById("pibutton");
       const pivalue = document.getElementById("pivalue");
-
+      const nextEnglish = document.getElementById("nextEnglish");
+      const eraseEnglish = document.getElementById("eraseEnglish");
       const n = pivalue.value;
       let value;
       const math = () => {
-       pi.innerHTML = value;
-       value = 1 - 1/3 + 1/5 - 1/7 + 1/9 - 1/11 + 1/13 - 1/15
+        pi.innerHTML = value;
+        value = 1 - 1 / 3 + 1 / 5 - 1 / 7 + 1 / 9 - 1 / 11 + 1 / 13 - 1 / 15;
         // for (i = 0; i < 1; i++) {
-          
+
         // }
       };
 
@@ -144,7 +161,17 @@
           }
         }
       };
+      const wrodarrange = [];
+      const meaningarrange = [];
+      const arrange = () => {
+        wrodarrange.push(word.value); 
+        meaningarrange.push(meaning.value);
+        
+      };
 
+      const erasearrange = () => {
+        
+      }
       let timeset;
 
       const gauge = () => {
@@ -163,6 +190,8 @@
       input1.onkeydown = function (event) {
         alert("키코드: " + event.keyCode);
       };
+      eraseEnglish.addEventListener("click", erasearrange);
+      nextEnglish.addEventListener("click", arrange);
       startEnglish.addEventListener("click", English);
       start.addEventListener("click", gauge);
       pibutton.addEventListener("click", math);
