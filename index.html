@@ -55,6 +55,7 @@
         placeholder="키코드"
         aria-label="키코드"
       />
+      <button id="save">save</button>
       <button id="startEnglish">start</button>
       <button id="nextEnglish">next</button>
       <button id="eraseEnglish">erase</button>
@@ -114,6 +115,8 @@
       const pivalue = document.getElementById("pivalue");
       const nextEnglish = document.getElementById("nextEnglish");
       const eraseEnglish = document.getElementById("eraseEnglish");
+      const save = document.getElementById("save");
+
       const n = pivalue.value;
       let value;
       const math = () => {
@@ -123,30 +126,30 @@
 
         // }
       };
-
+      const wordarray = [];
+      const meaningarray = [];
       let study = "nostudy";
       let wordvalue;
       let meaningvalue;
-      const English = () => {
+
+      const saveEnglish = () => {
         if (study === "nostudy") {
           study = "study";
-          wordvalue = word.value;
-          meaningvalue = meaning.value;
           word.value = "";
           meaning.value = "";
           console.log("if1");
-          return;
         }
+      };
+      const random = () => {
+        randomarray = Math.floor(Math.random() * 10);
+      }
+      const English = () => {
         if (study === "study") {
           if (wordvalue !== word.value || meaningvalue !== meaning.value) {
             worddiv.innerHTML = wordvalue;
             meaningdiv.innerHTML = meaningvalue;
             word.value = "";
             meaning.value = "";
-            setTimeout(() => {
-              meaningdiv.innerHTML = "";
-              worddiv.innerHTML = "";
-            }, 1000);
             console.log("if3");
             console.log(meaningvalue);
           }
@@ -155,23 +158,25 @@
             meaning.value = "";
             word.value = "";
             worddiv.innerHTML = "right";
-            setTimeout(() => {
-              worddiv.innerHTML = "";
-            }, 1000);
           }
         }
+        return;
       };
-      const wrodarrange = [];
-      const meaningarrange = [];
-      const arrange = () => {
-        wrodarrange.push(word.value); 
-        meaningarrange.push(meaning.value);
-        
+      const array = () => {
+        wordarray.push(word.value);
+        meaningarray.push(meaning.value);
+        meaning.value = "";
+        word.value = "";
+        worddiv.innerHTML = "철자: " + wordarray;
+        meaningdiv.innerHTML = "뜻: " + meaningarray;
+      };
+      const erasearray = () => {
+        wordarray.pop();
+        meaningarray.pop();
+        worddiv.innerHTML = "철자: " + wordarray;
+        meaningdiv.innerHTML = "뜻: " + meaningarray;
       };
 
-      const erasearrange = () => {
-        
-      }
       let timeset;
 
       const gauge = () => {
@@ -190,8 +195,10 @@
       input1.onkeydown = function (event) {
         alert("키코드: " + event.keyCode);
       };
-      eraseEnglish.addEventListener("click", erasearrange);
-      nextEnglish.addEventListener("click", arrange);
+
+      save.addEventListener("click", saveEnglish);
+      eraseEnglish.addEventListener("click", erasearray);
+      nextEnglish.addEventListener("click", array);
       startEnglish.addEventListener("click", English);
       start.addEventListener("click", gauge);
       pibutton.addEventListener("click", math);
